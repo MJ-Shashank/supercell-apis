@@ -32,23 +32,23 @@ class ClashRoyaleApi {
         }
     }
 
-    async riverRaceLog(tag, options = { limit: '', after: '', before: '' }) {
+    async riverRaceLog(tag = '', options = { limit: '', after: '', before: '' }) {
         return await this._fetch('/clans/' + this._tag(tag) + '/riverracelog' + this._params(options));
     }
 
-    async war(tag) {
+    async war(tag = '') {
         return await this._fetch('/clans/' + this._tag(tag) + '/currentwar');
     }
 
-    async clan(tag) {
+    async clan(tag = '') {
         return await this._fetch('/clans/' + this._tag(tag));
     }
 
-    async warLog(tag, options = { limit: '', after: '', before: '' }) {
+    async warLog(tag = '', options = { limit: '', after: '', before: '' }) {
         return await this._fetch('/clans/' + this._tag(tag) + '/warlog' + this._params(options));
     }
 
-    async members(tag, options = { limit: '', after: '', before: '' }) {
+    async members(tag = '', options = { limit: '', after: '', before: '' }) {
         return await this._fetch('/clans/' + this._tag(tag) + '/members' + this._params(options));
     }
 
@@ -56,19 +56,19 @@ class ClashRoyaleApi {
         return await this._fetch('/clans' + this._params(options));
     }
 
-    async currentRiverRace(tag) {
+    async currentRiverRace(tag = '') {
         return await this._fetch('/clans/' + this._tag(tag) + '/currentriverrace');
     }
 
-    async player(tag) {
+    async player(tag = '') {
         return await this._fetch('/players/' + this._tag(tag));
     }
 
-    async playerBattleLog(tag) {
+    async playerBattleLog(tag = '') {
         return await this._fetch('/players/' + this._tag(tag) + '/battlelog');
     }
 
-    async playersUpcomingChests(tag) {
+    async playersUpcomingChests(tag = '') {
         return await this._fetch('/players/' + this._tag(tag) + '/upcomingchests');
     }
 
@@ -101,7 +101,7 @@ class ClashRoyaleApi {
     }
 
     async globalTournamentRank(tournamentId = '', options = { limit: '', after: '', before: '' }) {
-        return await this._fetch('/locations/global/rankings/tournaments' + tournamentId + this._params(options));
+        return await this._fetch('/locations/global/rankings/tournaments/' + tournamentId + this._params(options));
     }
 
     async globalTournament() {

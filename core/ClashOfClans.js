@@ -32,35 +32,35 @@ class ClashOfClansApi {
         }
     }
 
-    async clans(options = { warFrequency: '', locationId: '', minMembers: '', maxMembers: '', minClanPoints: '', minClanLevel: '', limit: '', after: '', before: '', labelIds: '' }) {
+    async clans(options = { name: '', warFrequency: '', locationId: '', minMembers: '', maxMembers: '', minClanPoints: '', minClanLevel: '', limit: '', after: '', before: '', labelIds: '' }) {
         return await this._fetch('/clans' + this._params(options));
     }
 
-    async clan(tag) {
+    async clan(tag = '') {
         return await this._fetch('/clans/' + this._tag(tag));
     }
 
-    async members(tag) {
+    async members(tag = '') {
         return await this._fetch('/clans/' + this._tag(tag) + '/members');
     }
 
-    async war(tag) {
+    async war(tag = '') {
         return await this._fetch('/clans/' + this._tag(tag) + '/currentwar');
     }
 
-    async warLog(tag, options = { limit: '', after: '', before: '' }) {
+    async warLog(tag = '', options = { limit: '', after: '', before: '' }) {
         return await this._fetch('/clans/' + this._tag(tag) + '/warlog' + this._params(options));
     }
 
-    async cwlRounds(tag) {
+    async cwlRounds(tag = '') {
         return await this._fetch('/clans/' + this._tag(tag) + '/currentwar/leaguegroup');
     }
 
-    async cwl(tag) {
+    async cwl(tag = '') {
         return await this._fetch('/clanwarleagues/wars/' + this._tag(tag));
     }
 
-    async player(tag) {
+    async player(tag = '') {
         return await this._fetch('/players/' + this._tag(tag));
     }
 

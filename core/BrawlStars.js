@@ -32,19 +32,19 @@ class BrawlStarsApi {
         }
     }
 
-    async player(tag) {
+    async player(tag = '') {
         return await this._fetch('/players/' + this._tag(tag));
     }
 
-    async playerBattleLog(tag) {
+    async playerBattleLog(tag = '') {
         return await this._fetch('/players/' + this._tag(tag) + '/battlelog');
     }
 
-    async club(tag) {
+    async club(tag = '') {
         return await this._fetch('/clubs/' + this._tag(tag));
     }
 
-    async members(tag) {
+    async members(tag = '') {
         return await this._fetch('/clubs/' + this._tag(tag) + '/members');
     }
 

@@ -89,21 +89,21 @@ Note: `<>` :  `required` and `{}` : `optional (not always)`
 
 .playerLabels({ limit: '', after: '', before: '' })
 
-.locations(<locationId>, { limit: '', after: '', before: '' })
+.locations('<locationId>', { limit: '', after: '', before: '' })
 
-.clansRank(<locationId>, { limit: '', after: '', before: '' }) 
+.clansRank('<locationId>', { limit: '', after: '', before: '' }) 
 
-.playersRank(<locationId>, { limit: '', after: '', before: '' })
+.playersRank('<locationId>', { limit: '', after: '', before: '' })
 
-.clansVersusRank(<locationId>, { limit: '', after: '', before: '' }) 
+.clansVersusRank('<locationId>', { limit: '', after: '', before: '' }) 
 
-.playersVersusRank(<locationId>, { limit: '', after: '', before: '' })
+.playersVersusRank('<locationId>', { limit: '', after: '', before: '' })
 
-.leagues(<leagueId>, { limit: '', after: '', before: '' })
+.leagues('<leagueId>', { limit: '', after: '', before: '' })
 
-.warLeagues(<leagueId>, { limit: '', after: '', before: '' })
+.warLeagues('<leagueId>', { limit: '', after: '', before: '' })
 
-.leaguesSeason(<leagueId>, <seasonId>,  { limit: '', after: '', before: '' }) 
+.leaguesSeason('<leagueId>', '<seasonId>',  { limit: '', after: '', before: '' }) 
 ```
 
 ###  'Clash Royale' <a name = "clashroyale"></a>
@@ -111,41 +111,41 @@ Note: `<>` :  `required` and `{}` : `optional (not always)`
 Note: `<>` :  `required` and `{}` : `optional (not always)`
 
 ```
-.riverRaceLog(<tag>, { limit: '', after: '', before: '' })
+.riverRaceLog('<tag>', { limit: '', after: '', before: '' })
 
-.war(<tag>)
+.war('<tag>')
 
-.clan(<tag>)
+.clan('<tag>')
 
-.warLog(<tag>,  { limit: '', after: '', before: '' }) 
+.warLog('<tag>', { limit: '', after: '', before: '' }) 
 
-.members(<tag>, { limit: '', after: '', before: '' })
+.members('<tag>', { limit: '', after: '', before: '' })
 
 .clans({ name: '<required>', locationId: '', minMembers: '', maxMembers: '', minScore: '', limit: '', after: '', before: '', labelIds: '' }) 
 
-.currentRiverRace(<tag>)
+.currentRiverRace('<tag>')
 
-.player(<tag>) 
+.player('<tag>') 
 
-.playerBattleLog(<tag>) 
+.playerBattleLog('<tag>') 
 
-.playersUpcomingChests(<tag>)
+.playersUpcomingChests('<tag>')
 
 .cards({ limit: '', after: '', before: '' }) 
 
 .tournaments({ name: '', limit: '', after: '', before: '' })
 
-.tournamentsById(<tournamentId>) 
+.tournamentsById('<tournamentId>') 
 
-.locations(<locationId>, { limit: '', after: '', before: '' })
+.locations('<locationId>', { limit: '', after: '', before: '' })
 
-.clansRank(<locationId>, { limit: '', after: '', before: '' }) 
+.clansRank('<locationId>', { limit: '', after: '', before: '' }) 
 
-.playersRank(<locationId>, { limit: '', after: '', before: '' }) 
+.playersRank('<locationId>', { limit: '', after: '', before: '' }) 
 
-.clanWarsRank(<locationId>, { limit: '', after: '', before: '' }) 
+.clanWarsRank('<locationId>', { limit: '', after: '', before: '' }) 
 
-.globalTournamentRank(<tournamentId>, { limit: '', after: '', before: '' })
+.globalTournamentRank('<tournamentId>', { limit: '', after: '', before: '' })
 
 .globalTournament()
 ```
@@ -155,23 +155,23 @@ Note: `<>` :  `required` and `{}` : `optional (not always)`
 Note: `<>` :  `required` and `{}` : `optional (not always)`
 
 ```
-.player(<tag>)
+.player('<tag>')
 
-.playerBattleLog(<tag>) 
+.playerBattleLog('<tag>') 
 
-.club(<tag>)
+.club('<tag>')
 
-.members(<tag>) 
+.members('<tag>') 
 
 .brawlers({ name: '', limit: '', after: '', before: '' })
 
-.brawlersById(<tournamentId>)
+.brawlersById('<tournamentId>')
 
-.clubsRank(<countryCode>, { limit: '', after: '', before: '' }) 
+.clubsRank('<countryCode>', { limit: '', after: '', before: '' }) 
 
-.playersRank(<countryCode>, { limit: '', after: '', before: '' })
+.playersRank('<countryCode>', { limit: '', after: '', before: '' })
 
-.powerplay(<countryCode>, <seasonId>, { limit: '', after: '', before: '' }) 
+.powerplay('<countryCode>', '<seasonId>', { limit: '', after: '', before: '' }) 
 
-.brawlersRank(<countryCode>, <brawlersId>,  { limit: '', after: '', before: '' })
+.brawlersRank('<countryCode>', '<brawlersId>',  { limit: '', after: '', before: '' })
 ```
