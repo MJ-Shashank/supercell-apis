@@ -47,9 +47,6 @@ class SupercellApi {
                 throw new Error('Incorrect email/password!');
             }
 
-            // set axios post cookies 
-            axios.defaults.headers.post['Cookie'] = login_session;
-
             let keys = await this.getKeys();
             if (keys && keys.length >= 10) {
                 await this.revokeKey(keys.pop().id);
@@ -57,7 +54,7 @@ class SupercellApi {
 
             let ip = await getIP();
 
-            if (keys.find(k => k.name == ip)) {
+            if (keys && keys.find(k => k.name == ip)) {
                 //console.log('Old token in use!');
                 return keys.find(k => k.cidrRanges.includes(ip)).key;
             }
@@ -66,7 +63,7 @@ class SupercellApi {
             }
         }
         catch (error) {
-            console.warn(error.message);
+            return error.message;
         }
     }
 
@@ -86,16 +83,23 @@ class SupercellApi {
     }
 
     async loginSession() {
-        const response = await axios.post(`${dev_base[this.platform]}/login`, {
-            email: this.email,
-            password: this.password
-        });
-        if (response.data.status.message === 'ok') {
-            let cookies = response.headers['set-cookie'];
-            if (cookies && cookies.length)
-                return cookies[0].split(';')[0];
+        try {
+            const response = await axios.post(`${dev_base[this.platform]}/login`, {
+                email: this.email,
+                password: this.password
+            });
+            if (response.data.status.message === 'ok') {
+                let cookies = response.headers['set-cookie'];
+                if (cookies && cookies[0].includes('session=')) {
+                    axios.defaults.headers.post['Cookie'] = cookies[0].split(';')[0];
+                    return true;
+                }
+            }
+            return false;
         }
-        return null;
+        catch {
+            return false;
+        }
     }
 
     async getKeys() {
@@ -125,8 +129,9 @@ class SupercellApi {
         });
         if (response.data.status.message === 'ok') {
             //console.log('A token was deleted!');
+            return true;
         }
-        return;
+        return false;
     }
 }
 

@@ -1,4 +1,4 @@
-const { Token, ClashOfClans, ClashRoyale, BrawlStars } = require('@mj-shashank/supercell-apis');
+const { Token, ClashOfClans, ClashRoyale, BrawlStars } = require('supercell-apis');
 
 (async () => {
 

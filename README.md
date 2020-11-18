@@ -93,11 +93,11 @@ Note: `<>` :  `required` and `{}` : `optional (not always)`
 
 .clansRank(<locationId>, { limit: '', after: '', before: '' }) 
 
-.playersRank(<locationId>, ptions = { limit: '', after: '', before: '' })
+.playersRank(<locationId>, { limit: '', after: '', before: '' })
 
-.clansVersusRank(<locationId>,  { limit: '', after: '', before: '' }) 
+.clansVersusRank(<locationId>, { limit: '', after: '', before: '' }) 
 
-.playersVersusRank(<locationId>,  { limit: '', after: '', before: '' })
+.playersVersusRank(<locationId>, { limit: '', after: '', before: '' })
 
 .leagues(<leagueId>, { limit: '', after: '', before: '' })
 
@@ -119,7 +119,7 @@ Note: `<>` :  `required` and `{}` : `optional (not always)`
 
 .warLog(<tag>,  { limit: '', after: '', before: '' }) 
 
- .members(<tag>, { limit: '', after: '', before: '' })
+.members(<tag>, { limit: '', after: '', before: '' })
 
 .clans({ name: '<required>', locationId: '', minMembers: '', maxMembers: '', minScore: '', limit: '', after: '', before: '', labelIds: '' }) 
 
@@ -131,19 +131,19 @@ Note: `<>` :  `required` and `{}` : `optional (not always)`
 
 .playersUpcomingChests(<tag>)
 
-.cards( { limit: '', after: '', before: '' }) 
+.cards({ limit: '', after: '', before: '' }) 
 
 .tournaments({ name: '', limit: '', after: '', before: '' })
 
 .tournamentsById(<tournamentId>) 
 
-.locations(<locationId>,  { limit: '', after: '', before: '' })
+.locations(<locationId>, { limit: '', after: '', before: '' })
 
-.clansRank(<locationId>,  { limit: '', after: '', before: '' }) 
+.clansRank(<locationId>, { limit: '', after: '', before: '' }) 
 
-.playersRank(<locationId>,  { limit: '', after: '', before: '' }) 
+.playersRank(<locationId>, { limit: '', after: '', before: '' }) 
 
-.clanWarsRank(<locationId>,  { limit: '', after: '', before: '' }) 
+.clanWarsRank(<locationId>, { limit: '', after: '', before: '' }) 
 
 .globalTournamentRank(<tournamentId>, { limit: '', after: '', before: '' })
 
