@@ -1,0 +1,27 @@
+{
+  "name": "supercell-apis",
+  "version": "1.0.0",
+  "description": "A powerful javascript library for interacting with Clash Of Clans, Clash Royale, Brawl Stars api's.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node example.js"
+  },
+  "author": "MJ Shashank",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/MJ-Shashank/supercell-apis.git"
+  },
+  "homepage": "https://github.com/MJ-Shashank/supercell-apis#readme",
+  "bugs": {
+    "url": "https://github.com/MJ-Shashank/supercell-apis/issues"
+  },
+  "keywords": [
+    "clashofclans",
+    "clashroyale",
+    "brawlstars"
+  ]
+}
