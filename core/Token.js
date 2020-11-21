@@ -37,7 +37,7 @@ class SupercellApi {
 
             // Check token if valid
             if (token && await this.checkToken(token)) {
-                //console.log('Valid token!');
+                console.log('Valid token!');
                 return token;
             }
 
@@ -49,13 +49,13 @@ class SupercellApi {
 
             let keys = await this.getKeys();
             if (keys && keys.length >= 10) {
-                await this.revokeKey(keys.pop().id);
+                await this.revokeKey(keys.shift().id);
             }
 
             let ip = await getIP();
 
             if (keys && keys.find(k => k.name == ip)) {
-                //console.log('Old token in use!');
+                // console.log('Old token in use!');
                 return keys.find(k => k.cidrRanges.includes(ip)).key;
             }
             else {
@@ -63,7 +63,8 @@ class SupercellApi {
             }
         }
         catch (error) {
-            return error.message;
+            console.log(error.message);
+            return null;
         }
     }
 
@@ -117,7 +118,7 @@ class SupercellApi {
             cidrRanges: ip
         });
         if (response.data.status.message === 'ok') {
-            //console.log('A token was created!');
+            // console.log('A token was created!');
             return response.data.key.key;
         }
         return null;
@@ -128,7 +129,7 @@ class SupercellApi {
             id: id
         });
         if (response.data.status.message === 'ok') {
-            //console.log('A token was deleted!');
+            // console.log('A token was deleted!');
             return true;
         }
         return false;

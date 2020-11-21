@@ -1,5 +1,3 @@
 .vscode/
 node_modules/
-.npmignore
-.npmrc
 package-lock.json

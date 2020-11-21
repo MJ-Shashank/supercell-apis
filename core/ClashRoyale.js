@@ -6,11 +6,11 @@ const api_base = 'https://api.clashroyale.com/v1';
 
 class ClashRoyaleApi {
     constructor(token) {
-        this.token = token;
+        this.token = token ? token : '';
     }
 
     _tag(tag) {
-        return `%23${tag.toUpperCase().replace(/#/g, '').replace(/O/g, '0')}`;
+        return tag ? `%23${tag.toUpperCase().replace(/#/g, '').replace(/O/g, '0')}` : '';
     }
 
     _params(options) {
