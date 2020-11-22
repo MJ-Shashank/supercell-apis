@@ -1,6 +1,6 @@
 // Example for Creating a proxy server.
 
-// Run this file in seperate folder and install all dependencies.
+// Run this file in seperate folder and create .env file and install all dependencies.
 
 const express = require('express');
 const axios = require('axios');
@@ -36,6 +36,10 @@ const app = express();
 app.use(cors());
 
 app.get('*', async (request, response) => {
+
+    // Visit: https://localhost:4000/clashofclans/clans/%23V88CRPU
+    // Or
+    // https://<domain>/clashofclans/clans/%23V88CRPU
 
     if (request && request.path && request.path.match(/\/(clashofclans|clashroyale|brawlstars)\/(.*)/)) {
 
