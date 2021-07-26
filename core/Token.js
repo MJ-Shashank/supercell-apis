@@ -1,6 +1,8 @@
 const axios = require('axios');
 const { getIP } = require('./IP');
 
+require('dotenv').config();
+
 const api_base = {
     'clashofclans': 'https://api.clashofclans.com/v1',
     'clashroyale': 'https://api.clashroyale.com/v1',
@@ -48,7 +50,7 @@ class SupercellApi {
             }
 
             let keys = await this.getKeys();
-            if (keys && keys.length >= 10) {
+            if (keys && keys.length >= (process.env.KEY_LIMIT || 10)) {
                 await this.revokeKey(keys.shift().id);
             }
 
@@ -113,8 +115,8 @@ class SupercellApi {
 
     async createKey(ip) {
         const response = await axios.post(`${dev_base[this.platform]}/apikey/create`, {
-            name: ip,
-            description: ip,
+            name: process.env.KEY_NAME || ip,
+            description: process.env.KEY_DESC || ip,
             cidrRanges: ip
         });
         if (response.data.status.message === 'ok') {
