@@ -1,8 +1,12 @@
 const axios = require('axios');
 const qs = require('querystring');
+const moment = require('moment');
 const { errors } = require('./Error');
 
+require('dotenv').config();
+
 const api_base = 'https://api.brawlstars.com/v1';
+let cache = {};
 
 class BrawlStarsApi {
     constructor(token) {
@@ -19,12 +23,25 @@ class BrawlStarsApi {
 
     async _fetch(path) {
         try {
+            if (cache[path]) {
+                if (moment() > moment(cache[path].expires)) {
+                    delete cache[path];
+                } else {
+                    return { isCached: true, ...cache[path].data };
+                }
+            }
+
             const response = await axios.get(api_base + path, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${this.token}`
                 }
             });
+
+            if ((process.env.CACHE_SECONDS || 0) > 0 && response.status == 200) {
+                cache[path] = { data: response.data, expires: moment().add(process.env.CACHE_SECONDS, 's') };
+            }
+
             return { status: response.status, message: errors[response.status], ...response.data };
         }
         catch (error) {
