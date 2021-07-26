@@ -85,6 +85,8 @@ Note: `<>` :  `required` and `{}` : `optional (not always)`
 
 .player('<tag>')
 
+.playerVerify('<tag>', '<apiToken>')
+
 .clanLabels({ limit: '', after: '', before: '' }) 
 
 .playerLabels({ limit: '', after: '', before: '' })
@@ -126,8 +128,6 @@ Note: `<>` :  `required` and `{}` : `optional (not always)`
 .currentRiverRace('<tag>')
 
 .player('<tag>') 
-
-.playerVerify('<tag>', '<apiToken>')
 
 .playerBattleLog('<tag>') 
 
