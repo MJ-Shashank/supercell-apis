@@ -126,7 +126,7 @@ class SupercellApi {
 
     async createKey(ip) {
         const response = await axios.post(`${dev_base[this.platform]}/apikey/create`, {
-            name: ip,
+            name: this.name,
             description: ip,
             cidrRanges: ip
         });
