@@ -22,15 +22,15 @@ class BrawlStarsApi {
     }
 
     async _fetch(path) {
-        try {
-            if (cache[path]) {
-                if (moment() > moment(cache[path].expires)) {
-                    delete cache[path];
-                } else {
-                    return { isCached: true, ...cache[path].data };
-                }
+        if (cache[path]) {
+            if (moment() > moment(cache[path].expires)) {
+                delete cache[path];
+            } else {
+                return { isCached: true, ...cache[path].data };
             }
+        }
 
+        try {
             const response = await axios.get(api_base + path, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,14 +38,20 @@ class BrawlStarsApi {
                 }
             });
 
-            if ((process.env.CACHE_SECONDS || 0) > 0 && response.status == 200) {
+            if ((process.env.CACHE_SECONDS || 0) > 0) {
                 cache[path] = { data: response.data, expires: moment().add(process.env.CACHE_SECONDS, 's') };
             }
 
             return { status: response.status, message: errors[response.status], ...response.data };
         }
         catch (error) {
-            return { status: error.response.status, message: errors[error.response.status] };
+            let errObj = { status: error.response.status, message: errors[error.response.status] }
+
+            if ((process.env.CACHE_SECONDS || 0) > 0) {
+                cache[path] = { data: errObj, expires: moment().add(process.env.CACHE_SECONDS, 's') };
+            }
+
+            return errObj;
         }
     }
 
