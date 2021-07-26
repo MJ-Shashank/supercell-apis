@@ -19,13 +19,15 @@ const api_check = {
 };
 
 class SupercellApi {
-    constructor(platform, email, password) {
+    constructor(platform, email, password, { name, limit }) {
         this.platform = platform.toLowerCase();
         this.email = email.toLowerCase();
         this.password = password;
+        this.name = name || 'localhost';
+        this.limit = (limit > 10 ? 10 : (limit < 1 ? 1 : limit)) || 1;
     }
 
-    async tokenGeneration(token) {
+    async tokenGeneration() {
         try {
             if (this.platform === '' || this.email === '' || this.password === '') {
                 throw new Error('Please enter platform/email/password.');
@@ -35,12 +37,6 @@ class SupercellApi {
                 throw new Error('Please enter a correct platform.');
             }
 
-            // Check token if valid
-            if (token && await this.checkToken(token)) {
-                console.log('Valid token!');
-                return token;
-            }
-
             let login_session = await this.loginSession();
 
             if (!login_session) {
@@ -48,38 +44,55 @@ class SupercellApi {
             }
 
             let keys = await this.getKeys();
-            if (keys && keys.length >= 10) {
-                await this.revokeKey(keys.shift().id);
-            }
-
             let ip = await getIP();
 
-            if (keys && keys.find(k => k.name == ip)) {
-                // console.log('Old token in use!');
-                return keys.find(k => k.cidrRanges.includes(ip)).key;
+            if (keys && keys.filter(k => k.cidrRanges.includes(ip) && k.name === this.name).length === this.limit) {
+                console.log('Old token in use!');
+                return keys.filter(k => k.cidrRanges.includes(ip) && k.name === this.name).map(m => m.key);
             }
             else {
-                return await this.createKey(ip);
+
+                var full = keys.length - keys.filter(k => k.cidrRanges.includes(ip) && k.name === this.name).length + this.limit;
+                if (full.length > 10) {
+                    throw new Error('Please manually delete some token!');
+                }
+
+                let count = 0;
+                let keysLength = keys.length;
+                let matchedKeys = keys.filter(k => k.name === this.name);
+                for (let i = 0; i < matchedKeys.length; i++) {
+                    if (i >= this.limit) {
+                        await this.revokeKey(matchedKeys[i].id);
+                        keys.filter(f => f.id !== matchedKeys[i].id);
+                        keysLength--;
+                    }
+                    if (matchedKeys[i].cidrRanges.includes(ip)) {
+                        count++;
+                    }
+                }
+
+                matchedKeys = keys.filter(k => k.name === this.name);
+                for (let i = 0; i < matchedKeys.length; i++) {
+                    if (matchedKeys[i].name === this.name && !matchedKeys[i].cidrRanges.includes(ip) && keysLength <= 10 && count < this.limit) {
+                        await this.revokeKey(keys.find(f => f.id === matchedKeys[i].id).id);
+                        await this.createKey(ip);
+                        count++;
+                    }
+                }
+
+                for (let i = 0; i < this.limit - count; i++) {
+                    if (keysLength < 10) {
+                        await this.createKey(ip);
+                        keysLength++;
+                    }
+                }
+
+                return await this.getKeys().then(keys => keys.filter(k => k.cidrRanges.includes(ip) && k.name === this.name).map(m => m.key));
             }
         }
         catch (error) {
             console.log(error.message);
-            return null;
-        }
-    }
-
-    async checkToken(token) {
-        try {
-            await axios.get(`${api_base[this.platform]}${api_check[this.platform]}`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            return true;
-        }
-        catch (error) {
-            return false;
+            return [];
         }
     }
 
