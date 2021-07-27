@@ -4,7 +4,7 @@ const ClashRoyaleApi = require('./core/ClashRoyale');
 const BrawlStarsApi = require('./core/BrawlStars');
 
 class Token extends SupercellApi {
-    constructor(platform = '', email = '', password = '', { name = '', limit = 1 }) {
+    constructor(platform = '', email = '', password = '', { name = '', limit = 1 } = {}) {
         super(platform, email, password, { name, limit });
     }
 
@@ -14,19 +14,19 @@ class Token extends SupercellApi {
 }
 
 class ClashOfClans extends ClashOfClansApi {
-    constructor(token = '', { cache = 0 }) {
+    constructor(token = '', { cache = 0 } = {}) {
         super(token, { cache });
     }
 }
 
 class ClashRoyale extends ClashRoyaleApi {
-    constructor(token = '', { cache = 0 }) {
+    constructor(token = '', { cache = 0 } = {}) {
         super(token, { cache });
     }
 }
 
 class BrawlStars extends BrawlStarsApi {
-    constructor(token = '', { cache = 0 }) {
+    constructor(token = '', { cache = 0 } = {}) {
         super(token, { cache });
     }
 }
